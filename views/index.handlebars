@@ -1,0 +1,92 @@
+<div id="home">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-8 offset-2" id="topbanner">
+        <h1><img class="tictactoe-animation mr-2 d-none d-md-inline-block" src="/images/TicTacToe-1.svg" alt="tic tact toe animation"/> Let's Tic-Tac Toe!</h1>
+        <form class="clearfix mb-4" action="POST">
+          <div class="form-group">
+            <label for="username-input">Username:</label>
+            <input type="text" id="username-input" class="form-control" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="password-input">Password:</label>
+            <input type="text" id="password-input" class="form-control" placeholder="Password"></input>
+          </div>
+          <div class="login-info">
+            <a href="/newuser">First time here?</a>
+            <button id="usr-submit" class="btn btn-primary float-right">Submit</button>
+          </div>
+        </form>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+<canvas class="mx-auto" id="myChart"></canvas>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+
+<!--chart.js horizontal bar graph-->
+<script>
+  var ctx = document.getElementById("myChart").getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    title: {
+      fontsize: 60
+    },
+    data: {
+      labels: [
+        {{#each leaders}} 
+           "{{this}}",
+        {{/ each}}
+      ],
+  datasets: [{
+    label: 'Wow!',
+    data: [{{ data }}],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(255, 206, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(153, 102, 255, 0.2)'
+    ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)'
+      ],
+        borderWidth: 1
+      }]
+    },
+  options: {
+    legend: {
+      display: false
+    },
+    title: {
+      display: true,
+        text: "Longest Streak Leaderboard:",
+          fontSize: 60
+    },
+    scales: {
+      xAxes: [{
+        ticks: {
+          fontSize: 40,
+          beginAtZero: true
+        }
+      }],
+        yAxes: [{
+          ticks: {
+            fontSize: 40
+          }
+        }]
+    }
+  }
+  });
+</script>
